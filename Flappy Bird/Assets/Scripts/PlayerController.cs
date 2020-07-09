@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
         {
             // Reset the velocity to zero
             rb2d.velocity = Vector2.zero;
+            // Add Force
             rb2d.AddForce(new Vector2(0, upForce));
-
             // Set Animation
             animator.SetTrigger("Flap");
         }
@@ -39,8 +39,12 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // Set Velocity to Zero
+        rb2d.velocity = Vector2.zero;
+        // GameOver
         isDead = true;
         animator.SetTrigger("Die");
+        GameManager.instance.GameOver();
     }
 
 }
