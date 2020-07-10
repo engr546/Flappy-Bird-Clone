@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,7 +8,9 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
     public GameObject gameOverText;
-    public float ScrollSpeed = -1.5f;
+    public Text scoreText;
+
+    int score = 0;
 
     void Awake()
     {
@@ -24,11 +27,18 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void Scored()
+    {
+        if (IsGameOver)
+            return;
+        score++;
+        scoreText.text = "Score: " + score;
+    }
+
     public void GameOver()
     {
         gameOverText.SetActive(true);
         IsGameOver = true;
     }
-
 
 }
